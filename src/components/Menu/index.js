@@ -2,6 +2,7 @@ import React from "react";
 
 import Logo from "../Logo"
 import Search from "../Search";
+import ThemeSwitch from "../ThemeSwitch";
 
 import { StyledMenu } from "./styles";
 
@@ -12,6 +13,7 @@ function Menu({ searchValue, setSearchValue}) {
       <Logo />
       </div>
       <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+      <ThemeSwitch />
     </StyledMenu>
   );
 }

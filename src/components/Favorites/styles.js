@@ -33,6 +33,7 @@ export const StyledFavorites = styled.div`
       font-size: 14px;
       padding-top: 8px;
       display: block;
+      text-align: center;
       color: ${({ theme }) => theme.textColorBase || "#000"};
     }
   }

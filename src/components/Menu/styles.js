@@ -13,6 +13,10 @@ export const StyledMenu = styled.div`
   position: fixed;
   width: 100%;
 
+  label {
+    cursor: pointer;
+  }
+
   .logo {
     width: 100%;
     max-width: 80px;
