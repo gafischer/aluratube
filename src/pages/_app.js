@@ -8,6 +8,7 @@ import { ProviderWrapper } from "../providers/Wrapper";
 import { GlobalStyle } from "../styles/global";
 import { theme } from "../styles/theme";
 
+function Root({ Component, pageProps }) {
   const colorModeContext = useContext(ColorModeContext);
 
   return (
@@ -22,7 +23,7 @@ import { theme } from "../styles/theme";
 export default function _App(props) {
   return (
     <ProviderWrapper>
-      <MyApp {...props} />
+      <Root {...props} />
     </ProviderWrapper>
   )
 }
