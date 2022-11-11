@@ -6,12 +6,13 @@ import Banner from "../components/Banner";
 import Menu from "../components/Menu";
 import Timeline from "../components/Timeline";
 import Favorites from "../components/Favorites";
+import Layout from "../components/Layout";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState("");
 
   return (
-    <>
+    <Layout>
       <div
         style={{
           display: "flex",
@@ -25,6 +26,6 @@ export default function Home() {
         <Timeline searchValue={searchValue} playlists={config.playlists} />
         <Favorites favorites={config.favorites} />
       </div>
-    </>
+    </Layout>
   );
 }
