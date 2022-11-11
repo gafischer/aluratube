@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledMenu = styled.div`
+  z-index: 1;
   display: flex;
   flex-direction: row;
   height: 56px;
