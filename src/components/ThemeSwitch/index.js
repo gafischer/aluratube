@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import ColorModeContext from "../../contexts/ColorMode";
+import ColorModeContext from "../../context/ColorMode";
 
 import { StyledSwitch } from "./styles";
 

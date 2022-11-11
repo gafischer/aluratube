@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ColorModeContext from "../contexts/ColorMode";
+import ColorModeContext from "../context/ColorMode";
 
 function ColorModeProvider({ initialMode, children }) {
   const [mode, setMode] = useState(initialMode);
