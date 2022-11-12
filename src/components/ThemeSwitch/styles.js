@@ -13,6 +13,7 @@ export const StyledSwitch = styled.div`
   position: relative;
   label {
     width: 50px;
+    color: #fafafa;
   }
   span { display: inline-flex; width: 20px; height: 20px; align-items: center; justify-content: center; }
 

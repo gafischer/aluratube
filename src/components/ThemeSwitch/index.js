@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ColorModeContext from "../../context/ColorMode";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 import { StyledSwitch } from "./styles";
 
@@ -16,6 +17,12 @@ const ThemeSwitch = () => {
         }}
       />
       <label htmlFor="darkmode">
+        <span>
+          <MdLightMode />
+        </span>
+        <span>
+          <MdDarkMode />
+        </span>
       </label>
     </StyledSwitch>
   );

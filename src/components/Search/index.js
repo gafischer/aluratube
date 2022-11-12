@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 
 import { StyledSearch } from "./styles";
 
@@ -10,6 +11,9 @@ const Search = ({ searchValue, setSearchValue }) => {
         onChange={(e) => setSearchValue(e.target.value)}
         value={searchValue}
       />
+      <button>
+        <AiOutlineSearch />
+      </button>
     </StyledSearch>
   );
 };

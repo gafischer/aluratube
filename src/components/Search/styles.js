@@ -17,6 +17,7 @@ export const StyledSearch = styled.div`
     color: ${({ theme }) => theme.textColorBase};
     background-color: ${({ theme }) => theme.backgroundBase};
   }
+
   button {
     flex: 1;
     cursor: pointer;
@@ -26,6 +27,14 @@ export const StyledSearch = styled.div`
     border-left: 1px solid ${({ theme }) => theme.borderBase};
     width: 40px;
     height: 40px;
+    font-size: 20px;
+    color: ${({ theme }) => theme.textColorBase};
+
+    & > svg {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
     @media (min-width: 600px) {
       width: 64px;
       height: 40px;
