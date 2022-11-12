@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { StyledHeader } from "./styles";
 
-function Header({ name, job, github }) {
+const Header = ({ name, job, github }) => {
   return (
     <StyledHeader>
       <section className="user-info">

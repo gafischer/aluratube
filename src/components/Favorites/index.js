@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { StyledFavorites } from "./styles";
 
-function Favorites({ favorites }) {
+const Favorites = ({ favorites }) => {
   const favoritesLimit = 10;
 
   return (
@@ -35,6 +35,6 @@ function Favorites({ favorites }) {
       </section>
     </StyledFavorites>
   );
-}
+};
 
 export default Favorites;

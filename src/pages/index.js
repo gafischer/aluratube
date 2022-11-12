@@ -8,7 +8,7 @@ import Timeline from "../components/Timeline";
 import Favorites from "../components/Favorites";
 import Layout from "../components/Layout";
 
-export default function Home() {
+const Home = () => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
@@ -29,3 +29,5 @@ export default function Home() {
     </Layout>
   );
 }
+
+export default Home;

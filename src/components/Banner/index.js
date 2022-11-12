@@ -2,7 +2,7 @@ import React from "react";
 
 import { StyledBanner } from "./styles";
 
-function Banner({ url }) {
+const Banner = ({ url }) => {
   return <StyledBanner url={url} />;
 }
 

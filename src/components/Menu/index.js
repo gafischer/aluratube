@@ -6,7 +6,7 @@ import ThemeSwitch from "../ThemeSwitch";
 
 import { StyledMenu } from "./styles";
 
-function Menu({ searchValue, setSearchValue}) {
+const Menu = ({ searchValue, setSearchValue}) => {
   return (
     <StyledMenu>
       <div>

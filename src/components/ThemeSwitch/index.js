@@ -3,7 +3,7 @@ import ColorModeContext from "../../context/ColorMode";
 
 import { StyledSwitch } from "./styles";
 
-function ThemeSwitch() {
+const ThemeSwitch = () => {
   const colorModeContext = useContext(ColorModeContext);
 
   return (
@@ -16,8 +16,6 @@ function ThemeSwitch() {
         }}
       />
       <label htmlFor="darkmode">
-        <span>🌙</span>
-        <span>☀️</span>
       </label>
     </StyledSwitch>
   );
