@@ -115,6 +115,6 @@ const Timeline = ({ searchValue }) => {
       })}
     </StyledTimeline>
   );
-}
+};
 
 export default Timeline;
