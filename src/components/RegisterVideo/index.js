@@ -1,21 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useForm } from "./hooks";
 
-import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
 
 import { StyledRegisterVideo } from "./styles";
+import { supabase } from "../../services/supabase";
 
-export default function RegisterVideo() {
+export const RegisterVideo = () => {
   const registerForm = useForm({
     initialValues: { title: "", url: "" },
   });
-  const [formVisible, setFormVisible] = useState(false);
 
-  function handleCloseModal() {
+  const [formVisible, setFormVisible] = useState(false);
+  const [playlists, setPlaylists] = useState([]);
+
+  const getAllPlaylists = async () => {
+    const { data } = await supabase
+      .from("playlist")
+      .select("id,identification");
+
+    setPlaylists(data);
+  };
+
+  useEffect(() => {
+    getAllPlaylists();
+  }, []);
+
+  const getYoutubeThumb = (url) => {
+    const youtubeRegex =
+      /^(?:(?:https|http):\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be).*?(?:\/|v\/|u\/|embed\/|shorts\/|watch\?v=|(?<username>user\/))(?<id>[\w\-]{11})(?:\?|&|$)/;
+
+    const youtubeUrlData = youtubeRegex.exec(url);
+
+    if (!youtubeUrlData?.groups?.id) {
+      return null;
+    }
+
+    return `https://img.youtube.com/vi/${youtubeUrlData.groups.id}/hqdefault.jpg`;
+  };
+
+  const handleCloseModal = () => {
     setFormVisible(false);
     registerForm.clearForm();
-  }
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(e.currentTarget);
+    const values = Object.fromEntries(data.entries());
+
+    await supabase.from("video").insert({
+      title: values.title,
+      url: values.url,
+      playlist_id: values["playlist-id"],
+      thumbnail: getYoutubeThumb(registerForm.values.url),
+    });
+
+    registerForm.clearForm();
+    setFormVisible(false);
+  };
 
   return (
     <StyledRegisterVideo>
@@ -23,13 +68,7 @@ export default function RegisterVideo() {
         <AiOutlinePlus />
       </button>
       {formVisible ? (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            registerForm.clearForm();
-            setFormVisible(false);
-          }}
-        >
+        <form onSubmit={handleFormSubmit}>
           <div>
             <button
               type="button"
@@ -40,22 +79,37 @@ export default function RegisterVideo() {
             </button>
             <input
               placeholder="Título do Vídeo"
-              name="titulo"
-              value={registerForm.values.titulo}
+              name="title"
+              value={registerForm.values.title}
               onChange={registerForm.handleChange}
+              required
             />
             <input
               placeholder="URL do Youtube"
               name="url"
               value={registerForm.values.url}
               onChange={registerForm.handleChange}
+              required
             />
+            <select required defaultValue={""} name="playlist-id">
+              <option value="" disabled hidden>
+                Playlist...
+              </option>
+              {playlists
+                ? playlists.map((playlist) => {
+                    return (
+                      <option key={playlist.id} value={playlist.id}>
+                        {playlist.identification}
+                      </option>
+                    );
+                  })
+                : false}
+            </select>
             <button type="submit">Cadastrar</button>
-            {console.log("thumb", registerForm.thumbnail)}
 
-            {registerForm.thumbnail ? (
+            {getYoutubeThumb(registerForm.values.url) ? (
               <Image
-                src={`https://img.youtube.com/vi/${registerForm.thumbnail}/hqdefault.jpg`}
+                src={getYoutubeThumb(registerForm.values.url)}
                 alt="Youtube Thumb"
                 width="288"
                 height="216"
@@ -70,4 +124,6 @@ export default function RegisterVideo() {
       )}
     </StyledRegisterVideo>
   );
-}
+};
+
+export default RegisterVideo;
