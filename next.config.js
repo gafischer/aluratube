@@ -9,19 +9,16 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'github.com',
-        port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'img.youtube.com',
-        port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
-        port: '',
         pathname: '/**',
       },
     ],
