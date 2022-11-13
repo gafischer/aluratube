@@ -97,4 +97,10 @@ export const StyledRegisterVideo = styled.div`
       color: ${({ theme }) => theme.textColorBase};
     }
   }
+
+  button {
+    &:hover {
+      opacity: .5;
+    }
+  }
 `;
