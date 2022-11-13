@@ -30,6 +30,11 @@ export const StyledSearch = styled.div`
     font-size: 20px;
     color: ${({ theme }) => theme.textColorBase};
 
+    &:hover,
+    &:focus {
+      opacity: .5;
+    }
+
     & > svg {
       display: inline-block;
       vertical-align: middle;

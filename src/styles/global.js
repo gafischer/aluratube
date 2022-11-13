@@ -28,7 +28,6 @@ export const GlobalStyle = createGlobalStyle`
     flex: 1;
   }
   /* Globals */
-  button,
   a {
     text-decoration: none;
     opacity: 1;
