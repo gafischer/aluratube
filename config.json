@@ -1,17 +1,20 @@
 {
-  "name": "Gabriel Fischer Schroeder",
-  "job": "Software Developer",
-  "github": "gafischer",
-  "banner": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80",
-  "favorites": [
-    {
-      "github": "gafischer"
-    },
-    {
-      "github": "victorfinotelli"
-    },
-    {
-      "github": "vpinezi"
-    }
-  ]
+	"name": "Gabriel Fischer Schroeder",
+	"job": "Software Developer",
+	"github": "gafischer",
+	"banner": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80",
+	"favorites": [
+		{
+			"id": 1,
+			"github": "gafischer"
+		},
+		{
+			"id": 2,
+			"github": "victorfinotelli"
+		},
+		{
+			"id": 3,
+			"github": "vpinezi"
+		}
+	]
 }

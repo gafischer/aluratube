@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   /* Reset */
   * {
     margin: 0;
@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Helvetica', sans-serif;
     background-color: ${({ theme }) => theme.background.base};
-    color: ${({ theme}) => theme.text.primary}
+    color: ${({ theme }) => theme.text.primary}
   }
   /* NextJS */
   html {
@@ -38,3 +38,5 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 `;
+
+export default GlobalStyle;

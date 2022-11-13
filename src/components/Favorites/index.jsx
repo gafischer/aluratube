@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 
-import { StyledFavorites } from "./styles";
+import StyledFavorites from "./styles";
 
-const Favorites = ({ favorites }) => {
+function Favorites({ favorites }) {
   const favoritesLimit = 10;
 
   return (
@@ -11,9 +11,8 @@ const Favorites = ({ favorites }) => {
       <section>
         <h2>aluratube favoritos</h2>
         <div className="grid-container">
-          {favorites.slice(0, favoritesLimit).map((favorite, index) => {
-            return (
-              <div key={index}>
+          {favorites.slice(0, favoritesLimit).map((favorite) => (
+              <div key={favorite.id}>
                 <a
                   href={`https://github.com/${favorite.github}`}
                   target="_blank"
@@ -29,12 +28,11 @@ const Favorites = ({ favorites }) => {
                   <span>{`@${favorite.github}`}</span>
                 </a>
               </div>
-            );
-          })}
+            ))}
         </div>
       </section>
     </StyledFavorites>
   );
-};
+}
 
 export default Favorites;

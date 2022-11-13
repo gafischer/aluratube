@@ -4,9 +4,9 @@ import Logo from "./Logo"
 import Search from "./Search";
 import ThemeSwitch from "../ThemeSwitch";
 
-import { StyledMenu } from "./styles";
+import StyledMenu from "./styles";
 
-const Menu = ({ searchValue, setSearchValue}) => {
+function Menu({ searchValue, setSearchValue}) {
   return (
     <StyledMenu>
       <div>

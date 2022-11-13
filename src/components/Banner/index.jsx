@@ -1,8 +1,8 @@
 import React from "react";
 
-import { StyledBanner } from "./styles";
+import StyledBanner from "./styles";
 
-const Banner = ({ url }) => {
+function Banner({ url }) {
   return <StyledBanner url={url} />;
 }
 

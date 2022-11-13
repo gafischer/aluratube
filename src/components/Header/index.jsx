@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 
-import { StyledHeader } from "./styles";
+import StyledHeader from "./styles";
 
-const Header = ({ name, job, github }) => {
+function Header({ name, job, github }) {
   return (
     <StyledHeader>
       <section className="user-info">

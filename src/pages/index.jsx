@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from 'react'
 import config from "../../config.json";
 
 import Header from "../components/Header";
@@ -8,7 +8,7 @@ import Timeline from "../components/Timeline";
 import Favorites from "../components/Favorites";
 import Layout from "../components/Layout";
 
-const Home = () => {
+function Home() {
   const [searchValue, setSearchValue] = useState("");
 
   return (
