@@ -45,7 +45,7 @@ export const StyledTimeline = styled.div`
           padding-top: 8px;
           display: block;
           padding-right: 24px;
-          color: ${({ theme }) => theme.textColorBase || "#000"};
+          color: ${({ theme }) => theme.text.primary};
         }
       }
     }
@@ -57,21 +57,21 @@ export const StyledTimeline = styled.div`
   }
 
   *::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.backgroundBase};
+    background: ${({ theme }) => theme.background.base};
   }
 
   *::-webkit-scrollbar-thumb:horizontal:hover,
   *::-webkit-scrollbar-thumb:vertical:hover {
-    background: ${({ theme }) => theme.borderBase};
+    background: ${({ theme }) => theme.buttons.hover};
   }
 
   *::-webkit-scrollbar-thumb:horizontal:active,
   *::-webkit-scrollbar-thumb:vertical:active {
-    background: ${({ theme }) => theme.backgroundLevel1};
+    background: ${({ theme }) => theme.buttons.active};
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.backgroundLevel2};
+    background-color: ${({ theme }) => theme.buttons.selected};
     border-radius: 10px;
 
     &:hover,

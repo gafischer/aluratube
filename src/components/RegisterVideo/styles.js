@@ -61,7 +61,7 @@ export const StyledRegisterVideo = styled.div`
       border-radius: 8px;
       max-width: 320px;
       height: fit-content;
-      background-color: ${({ theme }) => theme.backgroundLevel2};
+      background-color: ${({ theme }) => theme.background.level2};
       display: flex;
       flex-direction: column;
       position: relative;
@@ -77,24 +77,27 @@ export const StyledRegisterVideo = styled.div`
   input,
   select {
     border-radius: 2px;
-    border: 1px solid ${({ theme }) => theme.borderBase};
+    border: 1px solid ${({ theme }) => theme.divider};
     padding: 8px 10px;
     margin-bottom: 10px;
     outline: none;
-    background-color: #f9f9f9;
-    color: ${({ theme }) => theme.textColorBase};
-    background-color: ${({ theme }) => theme.backgroundBase};
+    color: ${({ theme }) => theme.text.primary};
+    background-color: ${({ theme }) => theme.background.base};
+
+    ::placeholder {
+      color: ${({ theme }) => theme.text.disabled};
+    }
   }
 
   select {
     text-transform: capitalize;
 
     &:invalid {
-      color: #757575;
+      color: ${({ theme }) => theme.text.disabled};
     }
 
     option {
-      color: ${({ theme }) => theme.textColorBase};
+      color: ${({ theme }) => theme.text.primary};
     }
   }
 

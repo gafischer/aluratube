@@ -8,7 +8,7 @@ export const StyledThemeItem = styled.li`
     display: flex;
     font-size: 12px;
     justify-content: left;
-    color: ${({ theme }) => theme.textColorBase};
+    color: ${({ theme }) => theme.text.primary};
     background: none;
     border: none;
     cursor: pointer;
@@ -18,17 +18,17 @@ export const StyledThemeItem = styled.li`
     text-transform: capitalize;
 
     background: ${({ theme, selected }) =>
-      selected ? theme.backgroundBase : false};
+      selected ? theme.buttons.selected : false};
 
     border: ${({ theme, selected }) =>
-      selected ? `1px solid ${theme.borderBase}` : "none"};
+      selected ? `1px solid ${theme.divider}` : "none"};
 
     & > svg {
       margin: 0 8px;
     }
 
     &:hover {
-      background: ${({ theme }) => theme.borderBase};
+      background: ${({ theme }) => theme.buttons.hover};
     }
   }
 `;

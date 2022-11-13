@@ -34,7 +34,7 @@ export const StyledFavorites = styled.div`
       padding-top: 8px;
       display: block;
       text-align: center;
-      color: ${({ theme }) => theme.textColorBase || "#000"};
+      color: ${({ theme }) => theme.text.primary};
     }
   }
 `;

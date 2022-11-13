@@ -6,8 +6,8 @@ export const StyledMenu = styled.div`
   flex-direction: row;
   height: 56px;
   justify-content: space-between;
-  background-color: ${({ theme }) => theme.backgroundLevel1 || "#FFFFFF"};
-  border: 1px solid ${({ theme }) => theme.borderBase || "#e5e5e5"};
+  background-color: ${({ theme }) => theme.background.level1};
+  border: 1px solid ${({ theme }) => theme.divider};
   align-items: center;
   padding: 0 16px;
   gap: 16px;
@@ -25,7 +25,7 @@ export const StyledMenu = styled.div`
       max-width: 127px;
     }
     .text {
-      fill: ${({ theme }) => theme.textColorBase || "#222222"};
+      fill: ${({ theme }) => theme.text.primary};
     }
   }
 `;

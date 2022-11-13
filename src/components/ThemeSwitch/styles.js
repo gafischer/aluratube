@@ -5,7 +5,7 @@ export const StyledSwitch = styled.div`
     display: flex;
     padding: 4px;
     border-radius: 4px;
-    color: ${({ theme }) => theme.textColorBase};
+    color: ${({ theme }) => theme.text.primary};
     font-size: 16px;
     align-items: center;
     font-size: 12px;
@@ -19,7 +19,7 @@ export const StyledSwitch = styled.div`
     }
 
     &:hover {
-      background: ${({ theme }) => theme.borderBase};
+      background: ${({ theme }) => theme.buttons.hover};
     }
   }
 
@@ -29,8 +29,8 @@ export const StyledSwitch = styled.div`
     position: absolute;
     top: 44px;
     right: 12px;
-    background-color: ${({ theme }) => theme.backgroundLevel1};
-    border: 1px solid ${({ theme }) => theme.borderBase};
+    background-color: ${({ theme }) => theme.background.level1};
+    border: 1px solid ${({ theme }) => theme.divider};
     border-radius: 4px;
     width: 120px;
 

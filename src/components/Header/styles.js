@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledHeader = styled.div`
-  background-color: ${({ theme }) => theme.backgroundLevel1 };
+  background-color: ${({ theme }) => theme.background.level1 };
 
   .user-info {
     display: flex;
@@ -11,7 +11,7 @@ export const StyledHeader = styled.div`
     gap: 16px;
 
     p {
-      color: #666666;
+      color: ${({ theme }) => theme.text.secondary };
     }
   }
 `;
