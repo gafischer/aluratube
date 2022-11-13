@@ -4,15 +4,13 @@ import ColorModeContext from "../context/ColorMode";
 const ColorModeProvider = ({ initialMode, children }) => {
   const [mode, setMode] = useState(initialMode);
 
-  function toggleMode() {
-    if (mode === "dark") setMode("light");
-
-    if (mode === "light") setMode("dark");
+  const changeTheme = (theme) => {
+    setMode(theme);
   }
 
   return (
     <ColorModeContext.Provider
-      value={{ mode: mode, setMode: setMode, toggleMode: toggleMode }}
+      value={{ mode: mode, changeTheme: changeTheme }}
     >
       {children}
     </ColorModeContext.Provider>

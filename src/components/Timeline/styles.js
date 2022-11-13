@@ -60,8 +60,18 @@ export const StyledTimeline = styled.div`
     background: ${({ theme }) => theme.backgroundBase};
   }
 
+  *::-webkit-scrollbar-thumb:horizontal:hover,
+  *::-webkit-scrollbar-thumb:vertical:hover {
+    background: ${({ theme }) => theme.borderBase};
+  }
+
+  *::-webkit-scrollbar-thumb:horizontal:active,
+  *::-webkit-scrollbar-thumb:vertical:active {
+    background: ${({ theme }) => theme.backgroundLevel1};
+  }
+
   *::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.textColorBase};
+    background-color: ${({ theme }) => theme.backgroundLevel2};
     border-radius: 10px;
 
     &:hover,

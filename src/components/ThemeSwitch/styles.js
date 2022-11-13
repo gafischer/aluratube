@@ -1,36 +1,55 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledSwitch = styled.div`
-  background-color: #333333;
-  border: 0;
-  padding: 3px;
-  font-size: 12px;
-  width: 50px;
-  height: 25px;
-  display: flex;
-  justify-content: space-around;
-  border-radius: 10000px;
-  position: relative;
-  label {
-    width: 50px;
-    color: #fafafa;
-  }
-  span { display: inline-flex; width: 20px; height: 20px; align-items: center; justify-content: center; }
-
-  label:before {
-    content: "";
-    background-color: #fafafa;
-    border: 1px solid #333333;
-    width: 24px;
-    height: 24px;
-    border-radius: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    transition: .3s;
+  .menu-trigger {
+    display: flex;
+    padding: 4px;
+    border-radius: 4px;
+    color: ${({ theme }) => theme.textColorBase};
+    font-size: 16px;
+    align-items: center;
+    font-size: 12px;
     cursor: pointer;
+
+    & > svg {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 4px;
+      font-size: 20px;
+    }
+
+    &:hover {
+      background: ${({ theme }) => theme.borderBase};
+    }
   }
-  input[type="checkbox"] { display: none; }
-  input[type="checkbox"]:checked + label:before { transform: translateX(100%); }
+
+  .dropdown-menu {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 44px;
+    right: 12px;
+    background-color: ${({ theme }) => theme.backgroundLevel1};
+    border: 1px solid ${({ theme }) => theme.borderBase};
+    border-radius: 4px;
+    width: 120px;
+
+    & > ul {
+      list-style-type: none;
+    }
+  }
+
+  .dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: 400ms ease;
+  }
+
+  .dropdown-menu.inactive {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: 400ms ease;
+  }
 `;
