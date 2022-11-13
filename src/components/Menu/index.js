@@ -1,7 +1,7 @@
 import React from "react";
 
-import Logo from "../Logo"
-import Search from "../Search";
+import Logo from "./Logo"
+import Search from "./Search";
 import ThemeSwitch from "../ThemeSwitch";
 
 import { StyledMenu } from "./styles";
