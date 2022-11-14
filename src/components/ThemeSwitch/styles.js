@@ -39,15 +39,11 @@ const StyledThemeSwitch = styled.div`
 	.dropdown-menu.active {
 		opacity: 1;
 		visibility: visible;
-		transform: translateY(0);
-		transition: 400ms ease;
 	}
 
 	.dropdown-menu.inactive {
 		opacity: 0;
 		visibility: hidden;
-		transform: translateY(-20px);
-		transition: 400ms ease;
 	}
 
 	.close-menu {
