@@ -22,7 +22,7 @@ function ThemeSwitch() {
 		return () => {
 			document.removeEventListener("mousedown", handler);
 		};
-	});
+	}, []);
 
 	const handleMenuState = () => {
 		setOpen(!open);
