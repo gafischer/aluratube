@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
-import useForm from "./hooks";
+import { toast } from "react-toastify";
 
+import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
+
+import useForm from "./hooks";
 import StyledRegisterVideo from "./styles";
 import supabase from "../../services/supabase";
 
@@ -50,7 +52,7 @@ function RegisterVideo() {
 		const data = new FormData(e.currentTarget);
 		const values = Object.fromEntries(data.entries());
 
-		await supabase.from("video").insert({
+		const { status, error } = await supabase.from("video").insert({
 			title: values.title,
 			url: values.url,
 			playlist_id: values["playlist-id"],
@@ -59,6 +61,12 @@ function RegisterVideo() {
 
 		registerForm.clearForm();
 		setFormVisible(false);
+
+		if (status !== 201) {
+			return toast.error(`Erro ao cadastrar vídeo. ${error ?? ""}`);
+		}
+
+		return toast.success("Vídeo cadastrado com sucesso!");
 	};
 
 	return (
