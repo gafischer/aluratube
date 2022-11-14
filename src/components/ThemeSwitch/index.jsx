@@ -28,6 +28,12 @@ function ThemeSwitch() {
 		setOpen(!open);
 	};
 
+	const handleKeyPress = (e) => {
+		if (e?.code?.toLowerCase() === "enter") {
+			handleKeyPress();
+		}
+	};
+
 	return (
 		<StyledThemeSwitch>
 			<div ref={menuRef}>
@@ -40,16 +46,18 @@ function ThemeSwitch() {
 				</button>
 
 				<div className={`dropdown-menu ${open ? "active" : "inactive"}`}>
-					<button
-						type="button"
+					<div
 						className="close-menu"
 						onClick={handleMenuState}
+						onKeyDown={handleKeyPress}
+						role="button"
+						tabIndex="0"
 					>
 						<ul>
 							<ThemeItem theme="dark" />
 							<ThemeItem theme="light" />
 						</ul>
-					</button>
+					</div>
 				</div>
 			</div>
 		</StyledThemeSwitch>
