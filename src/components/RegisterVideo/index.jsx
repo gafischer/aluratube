@@ -48,7 +48,7 @@ function RegisterVideo() {
 		const data = new FormData(e.currentTarget);
 		const values = Object.fromEntries(data.entries());
 
-		const { status, error } = await supabase.from("video").insert({
+		const { error } = await supabase.from("video").insert({
 			title: values.title,
 			url: values.url,
 			playlist_id: values["playlist-id"],
@@ -57,8 +57,10 @@ function RegisterVideo() {
 
 		handleCloseModal();
 
-		if (status !== 201) {
-			return toast.error(`Erro ao cadastrar vídeo. ${error ?? ""}`);
+		if (error) {
+			return toast.error(
+				`Erro ao cadastrar vídeo. ${error.details ?? ""} ${error.message ?? ""}`
+			);
 		}
 
 		return toast.success("Vídeo cadastrado com sucesso!");
