@@ -9,12 +9,11 @@ import StyledRegisterVideo from "./styles";
 import supabase from "../../services/supabase";
 
 function RegisterVideo() {
-	const registerForm = useForm({
-		initialValues: { title: "", url: "" }
-	});
+	const registerForm = useForm({ initialValues: { title: "", url: "" } });
 
 	const [formVisible, setFormVisible] = useState(false);
 	const [playlists, setPlaylists] = useState([]);
+	const [thumbnail, setThumbnail] = useState("");
 
 	const getAllPlaylists = async () => {
 		const { data } = await supabase
@@ -23,10 +22,6 @@ function RegisterVideo() {
 
 		setPlaylists(data);
 	};
-
-	useEffect(() => {
-		getAllPlaylists();
-	}, []);
 
 	const getYoutubeThumb = (url) => {
 		const youtubeRegex =
@@ -42,8 +37,9 @@ function RegisterVideo() {
 	};
 
 	const handleCloseModal = () => {
-		setFormVisible(false);
 		registerForm.clearForm();
+		setFormVisible(false);
+		setThumbnail("");
 	};
 
 	const handleFormSubmit = async (e) => {
@@ -56,11 +52,10 @@ function RegisterVideo() {
 			title: values.title,
 			url: values.url,
 			playlist_id: values["playlist-id"],
-			thumbnail: getYoutubeThumb(registerForm.values.url)
+			thumbnail
 		});
 
-		registerForm.clearForm();
-		setFormVisible(false);
+		handleCloseModal();
 
 		if (status !== 201) {
 			return toast.error(`Erro ao cadastrar vídeo. ${error ?? ""}`);
@@ -68,6 +63,18 @@ function RegisterVideo() {
 
 		return toast.success("Vídeo cadastrado com sucesso!");
 	};
+
+	useEffect(() => {
+		getAllPlaylists();
+	}, []);
+
+	useEffect(() => {
+		const youtubeThumb = getYoutubeThumb(registerForm.values.url);
+
+		if (youtubeThumb) {
+			setThumbnail(youtubeThumb);
+		}
+	}, [registerForm.values.url]);
 
 	return (
 		<StyledRegisterVideo>
@@ -116,9 +123,9 @@ function RegisterVideo() {
 						</select>
 						<button type="submit">Cadastrar</button>
 
-						{getYoutubeThumb(registerForm.values.url) ? (
+						{thumbnail ? (
 							<Image
-								src={getYoutubeThumb(registerForm.values.url)}
+								src={thumbnail}
 								alt="Youtube Thumb"
 								width="288"
 								height="216"
