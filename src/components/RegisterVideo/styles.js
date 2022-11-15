@@ -106,6 +106,16 @@ const StyledRegisterVideo = styled.div`
 			opacity: 0.5;
 		}
 	}
+
+	span {
+		color: rgba(255, 0, 0, 0.8);
+		font-size: 12px;
+		margin-bottom: 8px;
+	}
+
+	.field-error {
+		box-shadow: 0px 0px 4px 2px rgba(255, 0, 0, 0.7);
+	}
 `;
 
 export default StyledRegisterVideo;

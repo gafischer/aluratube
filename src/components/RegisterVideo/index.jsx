@@ -9,8 +9,6 @@ import StyledRegisterVideo from "./styles";
 import supabase from "../../services/supabase";
 
 function RegisterVideo() {
-	const registerForm = useForm({ initialValues: { title: "", url: "" } });
-
 	const [formVisible, setFormVisible] = useState(false);
 	const [playlists, setPlaylists] = useState([]);
 	const [thumbnail, setThumbnail] = useState("");
@@ -36,12 +34,6 @@ function RegisterVideo() {
 		return `https://img.youtube.com/vi/${youtubeUrlData.groups.id}/hqdefault.jpg`;
 	};
 
-	const handleCloseModal = () => {
-		registerForm.clearForm();
-		setFormVisible(false);
-		setThumbnail("");
-	};
-
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 
@@ -55,7 +47,8 @@ function RegisterVideo() {
 			thumbnail
 		});
 
-		handleCloseModal();
+		setFormVisible(false);
+		setThumbnail("");
 
 		if (error) {
 			return toast.error(
@@ -66,17 +59,28 @@ function RegisterVideo() {
 		return toast.success("Vídeo cadastrado com sucesso!");
 	};
 
+	const { values, errors, handleChange, handleSubmit, clearForm } =
+		useForm(handleFormSubmit);
+
+	const handleCloseModal = () => {
+		clearForm();
+		setFormVisible(false);
+		setThumbnail("");
+	};
+
 	useEffect(() => {
 		getAllPlaylists();
 	}, []);
 
 	useEffect(() => {
-		const youtubeThumb = getYoutubeThumb(registerForm.values.url);
+		const youtubeThumb = getYoutubeThumb(values.url);
 
 		if (youtubeThumb) {
 			setThumbnail(youtubeThumb);
+		} else {
+			setThumbnail("");
 		}
-	}, [registerForm.values.url]);
+	}, [values.url]);
 
 	return (
 		<StyledRegisterVideo>
@@ -88,7 +92,7 @@ function RegisterVideo() {
 				<AiOutlinePlus />
 			</button>
 			{formVisible ? (
-				<form onSubmit={handleFormSubmit}>
+				<form onSubmit={handleSubmit}>
 					<div>
 						<button
 							type="button"
@@ -98,19 +102,23 @@ function RegisterVideo() {
 							<AiOutlineClose />
 						</button>
 						<input
+							className={errors.title ? "field-error" : false}
 							placeholder="Título do Vídeo"
 							name="title"
-							value={registerForm.values.title}
-							onChange={registerForm.handleChange}
+							value={values.title}
+							onChange={handleChange}
 							required
 						/>
+						{errors.title ? <span>{errors.title}</span> : false}
 						<input
+							className={errors.url ? "field-error" : false}
 							placeholder="URL do Youtube"
 							name="url"
-							value={registerForm.values.url}
-							onChange={registerForm.handleChange}
+							value={values.url}
+							onChange={handleChange}
 							required
 						/>
+						{errors.url ? <span>{errors.url}</span> : false}
 						<select required defaultValue="" name="playlist-id">
 							<option value="" disabled hidden>
 								Playlist...
