@@ -2,7 +2,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 const useForm = (callback) => {
-	const [values, setValues] = useState({});
+	const [values, setValues] = useState({
+		title: "",
+		url: "",
+		identification: "",
+		"playlist-id": 0,
+		thumbnail: ""
+	});
 	const [errors, setErrors] = useState({});
 
 	const youtubeRegex =
@@ -42,6 +48,18 @@ const useForm = (callback) => {
 				}
 				break;
 
+			case "identification":
+				if (value.length >= 1 && value.length <= 4) {
+					setErrors({
+						...errors,
+						identification: "*Insira pelo menos 5 caracteres."
+					});
+				} else {
+					const newObj = omit(errors, "identification");
+					setErrors(newObj);
+				}
+				break;
+
 			default:
 				break;
 		}
@@ -50,8 +68,7 @@ const useForm = (callback) => {
 	const handleChange = (e) => {
 		e.persist();
 
-		const { value } = e.target;
-		const { name } = e.target;
+		const { value, name } = e.target;
 
 		validate(name, value);
 
@@ -62,7 +79,13 @@ const useForm = (callback) => {
 	};
 
 	const clearForm = () => {
-		setValues({});
+		setValues({
+			title: "",
+			url: "",
+			identification: "",
+			"playlist-id": 0,
+			thumbnail: ""
+		});
 		setErrors({});
 	};
 

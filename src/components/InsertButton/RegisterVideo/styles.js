@@ -1,26 +1,6 @@
 import styled from "styled-components";
 
 const StyledRegisterVideo = styled.div`
-	.add-video {
-		width: 40px;
-		height: 40px;
-		font-size: 20px;
-		color: inherit;
-		position: fixed;
-		bottom: 16px;
-		right: 16px;
-		border: 0;
-		background-color: red;
-		border-radius: 50%;
-		z-index: 99;
-		cursor: pointer;
-
-		& > svg {
-			display: inline-block;
-			vertical-align: middle;
-		}
-	}
-
 	.close-modal {
 		width: 25px;
 		height: 25px;

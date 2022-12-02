@@ -2,24 +2,15 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
-import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 
-import useForm from "./hooks";
+import useForm from "../hooks";
 import StyledRegisterVideo from "./styles";
-import supabase from "../../services/supabase";
+import supabase, { subscribe } from "../../../services/supabase";
 
-function RegisterVideo() {
-	const [formVisible, setFormVisible] = useState(false);
+function RegisterVideo({ formVisible, closeForm }) {
 	const [playlists, setPlaylists] = useState([]);
 	const [thumbnail, setThumbnail] = useState("");
-
-	const getAllPlaylists = async () => {
-		const { data } = await supabase
-			.from("playlist")
-			.select("id,identification");
-
-		setPlaylists(data);
-	};
 
 	const getYoutubeThumb = (url) => {
 		const youtubeRegex =
@@ -47,7 +38,7 @@ function RegisterVideo() {
 			thumbnail
 		});
 
-		setFormVisible(false);
+		closeForm();
 		setThumbnail("");
 
 		if (error) {
@@ -64,12 +55,31 @@ function RegisterVideo() {
 
 	const handleCloseModal = () => {
 		clearForm();
-		setFormVisible(false);
+		closeForm();
 		setThumbnail("");
 	};
 
 	useEffect(() => {
+		const getAllPlaylists = async () => {
+			const { data } = await supabase
+				.from("playlist")
+				.select("id,identification");
+
+			setPlaylists(data);
+		};
+
 		getAllPlaylists();
+
+		const playlistSubscription = subscribe(
+			"playlist",
+			async ({ id, identification }) =>
+				setPlaylists((playlist) => [...playlist, { id, identification }]),
+			"INSERT"
+		);
+
+		return () => {
+			playlistSubscription.unsubscribe();
+		};
 	}, []);
 
 	useEffect(() => {
@@ -84,13 +94,6 @@ function RegisterVideo() {
 
 	return (
 		<StyledRegisterVideo>
-			<button
-				type="button"
-				className="add-video"
-				onClick={() => setFormVisible(true)}
-			>
-				<AiOutlinePlus />
-			</button>
 			{formVisible ? (
 				<form onSubmit={handleSubmit}>
 					<div>
@@ -102,7 +105,7 @@ function RegisterVideo() {
 							<AiOutlineClose />
 						</button>
 						<input
-							className={errors.title ? "field-error" : false}
+							className={errors.title ? "field-error" : undefined}
 							placeholder="Título do Vídeo"
 							name="title"
 							value={values.title}
@@ -111,7 +114,7 @@ function RegisterVideo() {
 						/>
 						{errors.title ? <span>{errors.title}</span> : false}
 						<input
-							className={errors.url ? "field-error" : false}
+							className={errors.url ? "field-error" : undefined}
 							placeholder="URL do Youtube"
 							name="url"
 							value={values.url}

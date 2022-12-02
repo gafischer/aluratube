@@ -1,73 +1,44 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import supabase from "../../services/supabase";
+import supabase, { subscribe } from "../../services/supabase";
 
 import StyledTimeline from "./styles";
 
 function Timeline({ searchValue }) {
 	const [videos, setVideos] = useState([]);
-	const [playlists, setPlaylists] = useState([
-		{
-			id: "",
-			title: "",
-			url: "",
-			thumbnail: "",
-			playlist: { identification: "" }
-		}
-	]);
+	const [playlists, setPlaylists] = useState([]);
 
-	const getPlaylistById = async (id) => {
-		const { data } = await supabase
-			.from("playlist")
-			.select("id, identification")
-			.eq("id", id)
-			.single();
+	useEffect(() => {
+		const getPlaylistById = async (id) => {
+			const { data } = await supabase
+				.from("playlist")
+				.select("id, identification")
+				.eq("id", id)
+				.single();
 
-		return data;
-	};
+			return data;
+		};
 
-	const getAllPlaylists = async () => {
-		const { data } = await supabase
-			.from("playlist")
-			.select("id, identification");
-
-		setPlaylists(data);
-	};
-
-	const getAllVideos = async () => {
-		const { data } = await supabase.from("video").select(
-			`id, title, url, thumbnail,
+		const getAllVideos = async () => {
+			const { data } = await supabase.from("video").select(
+				`id, title, url, thumbnail,
        playlist (
         identification
         )`
-		);
+			);
 
-		setVideos(data);
-	};
+			setVideos(data);
+		};
 
-	useEffect(() => {
 		getAllVideos();
-		getAllPlaylists();
-	}, []);
 
-	const videoSubscription = supabase
-		.channel("public:video")
-		.on(
-			"postgres_changes",
-			{ event: "INSERT", schema: "public", table: "video" },
-			async (payload) => {
-				const {
-					id,
-					title,
-					url,
-					thumbnail,
-					playlist_id: playlistId
-				} = payload.new;
-
+		const videoSubscription = subscribe(
+			"video",
+			async ({ id, title, url, thumbnail, playlist_id: playlistId }) => {
 				const { identification } = await getPlaylistById(playlistId);
 
-				setVideos([
-					...videos,
+				setVideos((video) => [
+					...video,
 					{
 						id,
 						title,
@@ -76,11 +47,25 @@ function Timeline({ searchValue }) {
 						playlist: { identification }
 					}
 				]);
-
-				supabase.removeChannel(videoSubscription);
 			}
-		)
-		.subscribe();
+		);
+
+		return () => {
+			videoSubscription.unsubscribe();
+		};
+	}, []);
+
+	useEffect(() => {
+		const getAllPlaylists = async () => {
+			const { data } = await supabase
+				.from("playlist")
+				.select("id, identification");
+
+			setPlaylists(data);
+		};
+
+		getAllPlaylists();
+	}, [videos]);
 
 	return (
 		<StyledTimeline>
@@ -89,7 +74,7 @@ function Timeline({ searchValue }) {
 					video.playlist.identification.includes(playlist.identification)
 				);
 
-				return (
+				return sectionVideos.length > 0 ? (
 					<section key={playlist.id}>
 						<h2>{playlist.identification}</h2>
 						<div>
@@ -122,6 +107,8 @@ function Timeline({ searchValue }) {
 								))}
 						</div>
 					</section>
+				) : (
+					false
 				);
 			})}
 		</StyledTimeline>
