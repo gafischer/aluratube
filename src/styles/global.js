@@ -7,11 +7,13 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
   body {
     font-family: 'Helvetica', sans-serif;
     background-color: ${({ theme }) => theme.background.base};
     color: ${({ theme }) => theme.text.primary}
   }
+
   /* NextJS */
   html {
     display: flex;
@@ -27,6 +29,11 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex: 1;
   }
+
+  main {
+    width: 100%;
+  }
+
   /* Globals */
   a {
     text-decoration: none;

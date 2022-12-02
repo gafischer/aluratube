@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { RiLoader4Line } from "react-icons/ri";
 import supabase, { subscribe } from "../../services/supabase";
 
-import StyledTimeline from "./styles";
+import StyledTimeline, { Loading } from "./styles";
 
 function Timeline({ searchValue }) {
+	const [loading, setLoading] = useState(true);
 	const [videos, setVideos] = useState([]);
 	const [playlists, setPlaylists] = useState([]);
 
@@ -28,6 +30,7 @@ function Timeline({ searchValue }) {
 			);
 
 			setVideos(data);
+			setLoading(false);
 		};
 
 		getAllVideos();
@@ -67,7 +70,11 @@ function Timeline({ searchValue }) {
 		getAllPlaylists();
 	}, [videos]);
 
-	return (
+	return loading ? (
+		<Loading>
+			<RiLoader4Line size={50} />
+		</Loading>
+	) : (
 		<StyledTimeline>
 			{playlists.map((playlist) => {
 				const sectionVideos = videos.filter((video) =>
