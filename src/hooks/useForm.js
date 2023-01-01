@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { youtubeTest } from "../utils/youtube";
 
 const useForm = (callback) => {
 	const [values, setValues] = useState({
@@ -10,9 +11,6 @@ const useForm = (callback) => {
 		thumbnail: ""
 	});
 	const [errors, setErrors] = useState({});
-
-	const youtubeRegex =
-		/^(?:(?:https|http):\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be).*?(?:\/|v\/|u\/|embed\/|shorts\/|watch\?v=|(?<username>user\/))(?<id>[\w-]{11})(?:\?|&|$)/;
 
 	const omit = (obj, ...keys) => {
 		const keysToRemove = new Set(keys.flat());
@@ -37,7 +35,7 @@ const useForm = (callback) => {
 				break;
 
 			case "url":
-				if (value.length >= 1 && !youtubeRegex.test(value)) {
+				if (value.length >= 1 && !youtubeTest(value)) {
 					setErrors({
 						...errors,
 						url: "*Insira um vídeo do youtube válido."

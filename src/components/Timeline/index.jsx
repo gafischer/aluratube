@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-
+import Link from "next/link";
 import supabase, { subscribe } from "../../services/supabase";
 
 import Loading from "../Loading";
@@ -92,10 +92,10 @@ function Timeline({ searchValue }) {
 									return titleNormalized.includes(searchValueNormalized);
 								})
 								.map((video) => (
-									<a
+									<Link
 										key={video.id}
-										href={video.url}
-										target="_blank"
+										href={`/video/${video.id}`}
+										// target="_blank"
 										rel="noreferrer"
 									>
 										<Image
@@ -110,7 +110,7 @@ function Timeline({ searchValue }) {
 											}}
 										/>
 										<span>{video.title}</span>
-									</a>
+									</Link>
 								))}
 						</div>
 					</section>

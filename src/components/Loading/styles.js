@@ -17,6 +17,7 @@ const StyledLoading = styled.div`
 	justify-content: center;
 	align-items: center;
 	padding: 32px 0;
+	width: 100%;
 
 	svg {
 		fill: #fff;
