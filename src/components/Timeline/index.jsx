@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { RiLoader4Line } from "react-icons/ri";
+
 import supabase, { subscribe } from "../../services/supabase";
 
-import StyledTimeline, { Loading } from "./styles";
+import Loading from "../Loading";
+
+import StyledTimeline from "./styles";
 
 function Timeline({ searchValue }) {
 	const [loading, setLoading] = useState(true);
@@ -71,9 +73,7 @@ function Timeline({ searchValue }) {
 	}, [videos]);
 
 	return loading ? (
-		<Loading>
-			<RiLoader4Line size={50} />
-		</Loading>
+		<Loading />
 	) : (
 		<StyledTimeline>
 			{playlists.map((playlist) => {

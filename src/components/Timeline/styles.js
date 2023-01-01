@@ -1,29 +1,4 @@
-import styled, { keyframes } from "styled-components";
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-export const Loading = styled.div`
-	color: #fff;
-	font-size: 30px;
-	font-weight: bold;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 32px 0;
-
-	svg {
-		fill: #fff;
-		margin: 10px;
-		animation: ${rotate} 1s linear infinite;
-	}
-`;
+import styled from "styled-components";
 
 const StyledTimeline = styled.div`
 	flex: 1;

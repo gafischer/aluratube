@@ -26,7 +26,7 @@ function Home() {
 				<Banner url={config.banner} />
 				<Header name={config.name} job={config.job} github={config.github} />
 				<Timeline searchValue={searchValue} playlists={config.playlists} />
-				<Favorites favorites={config.favorites} />
+				<Favorites />
 			</div>
 		</Layout>
 	);

@@ -10,15 +10,22 @@ const StyledFavorites = styled.div`
 
 	h2 {
 		font-size: 16px;
+	}
+
+	.section-header {
+		display: flex;
+		flex-direction: row;
+		gap: 8px;
+		width: 100%;
 		margin-bottom: 16px;
 		text-transform: capitalize;
+		align-items: center;
 	}
 
 	.grid-container {
 		display: flex;
 		flex-direction: row;
 		align-items: flex-start;
-		padding: 0px;
 		gap: 8px;
 		height: 124px;
 	}
@@ -28,6 +35,7 @@ const StyledFavorites = styled.div`
 		align-items: center;
 		flex-direction: column;
 		width: 100px;
+		margin: 0 4px;
 
 		span {
 			font-size: 14px;

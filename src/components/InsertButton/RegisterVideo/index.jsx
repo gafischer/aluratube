@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { AiOutlineClose } from "react-icons/ai";
 
-import useForm from "../hooks";
+import useForm from "../../../hooks/useForm";
 import StyledRegisterVideo from "./styles";
 import supabase, { subscribe } from "../../../services/supabase";
 

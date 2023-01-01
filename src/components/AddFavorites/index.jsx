@@ -1,33 +1,33 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
-import supabase from "../../../services/supabase";
-import useForm from "../../../hooks/useForm";
+import supabase from "../../services/supabase";
+import useForm from "../../hooks/useForm";
 
-import StyledRegisterPlaylist from "./styles";
+import StyledAddFavorites from "./styles";
 
-function RegisterPlaylist({ formVisible, closeForm }) {
+function AddFavorites({ formVisible, closeForm }) {
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 
 		const data = new FormData(e.currentTarget);
 		const values = Object.fromEntries(data.entries());
 
-		const { error } = await supabase.from("playlist").insert({
-			identification: values.identification
+		const { error } = await supabase.from("favorite").insert({
+			github: values.github
 		});
 
 		closeForm();
 
 		if (error) {
 			return toast.error(
-				`Erro ao cadastrar playlist. ${error.details ?? ""} ${
+				`Erro ao cadastrar favorito. ${error.details ?? ""} ${
 					error.message ?? ""
 				}`
 			);
 		}
 
-		return toast.success("Playlist cadastrada com sucesso!");
+		return toast.success("Favorito cadastrado com sucesso!");
 	};
 
 	const { values, errors, handleChange, handleSubmit, clearForm } =
@@ -39,7 +39,7 @@ function RegisterPlaylist({ formVisible, closeForm }) {
 	};
 
 	return (
-		<StyledRegisterPlaylist>
+		<StyledAddFavorites>
 			{formVisible ? (
 				<form onSubmit={handleSubmit}>
 					<div>
@@ -51,26 +51,22 @@ function RegisterPlaylist({ formVisible, closeForm }) {
 							<AiOutlineClose />
 						</button>
 						<input
-							className={errors.identification ? "field-error" : undefined}
-							placeholder="Nome da playlist"
-							name="identification"
-							value={values.identification}
+							className={errors.github ? "field-error" : undefined}
+							placeholder="Github Favorito"
+							name="github"
+							value={values.github}
 							onChange={handleChange}
 							required
 						/>
-						{errors.identification ? (
-							<span>{errors.identification}</span>
-						) : (
-							false
-						)}
+						{errors.github ? <span>{errors.github}</span> : false}
 						<button type="submit">Cadastrar</button>
 					</div>
 				</form>
 			) : (
 				false
 			)}
-		</StyledRegisterPlaylist>
+		</StyledAddFavorites>
 	);
 }
 
-export default RegisterPlaylist;
+export default AddFavorites;
